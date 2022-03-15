@@ -6,19 +6,17 @@ using OpenQA.Selenium.Chrome;
 public class TapAzScraper : ScraperTemplate
 {
     private IWebDriver Driver;
-    private string SearchingPattern;
 
-    public TapAzScraper(string searchingPattern)
+    public TapAzScraper()
     {
-        this.SearchingPattern = searchingPattern;
         this.Driver = new ChromeDriver();
         this.Driver.Navigate().GoToUrl("https://tap.az/");
     }
 
-    protected override void SearchItemsByPattern()
+    public override void SearchItemsByPattern(string pattern)
     {
         IWebElement element = this.Driver.FindElement(By.XPath("//*[@id='q_keywords']"));
-        element.SendKeys(this.SearchingPattern);
+        element.SendKeys(pattern);
         element = this.Driver.FindElement(By.ClassName("header-btn_search"));
         element.Click();
     }

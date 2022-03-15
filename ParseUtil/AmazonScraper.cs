@@ -6,20 +6,18 @@ using OpenQA.Selenium.Chrome;
 public class AmazonScraper : ScraperTemplate
 {
     private IWebDriver Driver;
-    private string SearchingPattern;
 
-    public AmazonScraper(string searchingPattern)
+    public AmazonScraper()
     {
-        this.SearchingPattern = searchingPattern;
         this.Driver = new ChromeDriver();
         Driver.Navigate().GoToUrl("https://www.amazon.in/");
 
     }
 
-    protected override void SearchItemsByPattern()
+    public override void SearchItemsByPattern(string pattern)
     {
         IWebElement element = Driver.FindElement(By.XPath("//*[@id='twotabsearchtextbox']"));
-        element.SendKeys(this.SearchingPattern);
+        element.SendKeys(pattern);
         element = Driver.FindElement(By.XPath("//*[@id='nav-search-submit-button']"));
         element.Click();
     }

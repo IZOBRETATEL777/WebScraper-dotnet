@@ -6,20 +6,18 @@ using OpenQA.Selenium.Chrome;
 public class TrendyolScraper : ScraperTemplate
 {
     private IWebDriver Driver;
-    private string SearchingPattern;
 
-    public TrendyolScraper(string searchingPattern)
+    public TrendyolScraper()
     {
-        this.SearchingPattern = searchingPattern;
         this.Driver = new ChromeDriver();
         Driver.Navigate().GoToUrl("https://www.trendyol.com/az");
         Driver.Navigate().Refresh();
     }
 
-    protected override void SearchItemsByPattern()
+    public override void SearchItemsByPattern(string pattern)
     {
         IWebElement element = this.Driver.FindElement(By.XPath("//*[@id='search']"));
-        element.SendKeys(this.SearchingPattern);
+        element.SendKeys(pattern);
         element = this.Driver.FindElement(By.XPath("//*[@id='tydortyuzdortpage']/div/div/div[4]/form/div/div[2]/button"));
         element.Click();
     }

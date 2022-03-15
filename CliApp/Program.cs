@@ -3,17 +3,18 @@
 Console.WriteLine("Enter item to search:");
 String toSearch = Console.ReadLine() ?? throw new Exception();
 
-ScraperTemplate[] scrapers = {new AmazonScraper(toSearch), new TapAzScraper(toSearch), new TrendyolScraper(toSearch)};
+User[] users = {
+    new User("Jhon", "Doe", "jhon_doe@mail.az", new AmazonScraper()), 
+    new User("Donald", "Trump", "donald_j_trump@yande.ru", new TapAzScraper()),
+    new User("Jack", "Ripper", "bestSeller@gmail.com", new TrendyolScraper()),
+};
 
-List<Item> items = new List<Item>();
-
-foreach (ScraperTemplate scraper in scrapers){
-    items.AddRange(scraper.GetItems());
+foreach (User user in users)
+{
+    List<Item> items = user.Search(toSearch);
+    foreach (Item item in items) {
+        System.Console.WriteLine($"Title: {item.Title}\nPrice: {item.Price}\n");
+    }
 }
-
-foreach (Item item in items) {
-    System.Console.WriteLine($"Title: {item.Title}\nPrice: {item.Price}\n");
-}
-
 
 

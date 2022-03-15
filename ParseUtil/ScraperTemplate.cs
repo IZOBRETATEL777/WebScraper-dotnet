@@ -5,7 +5,6 @@ public abstract class ScraperTemplate
 {
     public List<Item> GetItems()
     {
-        this.SearchItemsByPattern();
         List<Item> items = new List<Item>();
         List<IWebElement> scrapedItems = this.ScrapItems();
         foreach (IWebElement webItem in scrapedItems)
@@ -17,7 +16,7 @@ public abstract class ScraperTemplate
         this.FinishScraping();
         return items;
     }
-    protected abstract void SearchItemsByPattern();
+    public abstract void SearchItemsByPattern(string pattern);
     protected abstract List<IWebElement> ScrapItems();
     protected abstract Price GetPrice(IWebElement item);
     protected abstract string GetTitle(IWebElement item);
