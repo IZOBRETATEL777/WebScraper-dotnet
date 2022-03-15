@@ -11,8 +11,8 @@ User[] users = {
 
 foreach (User user in users)
 {
-    List<Item> items = user.Search(toSearch);
-    foreach (Item item in items) {
+    List<IItem> items = user.Search(toSearch);
+    foreach (IItem item in items) {
         System.Console.WriteLine($"Title: {item.Title}\nPrice: {item.Price}\n");
     }
 }

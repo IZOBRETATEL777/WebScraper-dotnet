@@ -15,7 +15,7 @@ public class User
         this.Scraper = scraper;
     }
 
-    public List<Item> Search(string toSearch)
+    public List<IItem> Search(string toSearch)
     {
         this.Scraper.SearchItemsByPattern(toSearch);
         return this.Scraper.GetItems();

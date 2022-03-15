@@ -3,15 +3,15 @@ using OpenQA.Selenium;
 
 public abstract class ScraperTemplate
 {
-    public List<Item> GetItems()
+    public List<IItem> GetItems()
     {
-        List<Item> items = new List<Item>();
+        List<IItem> items = new List<IItem>();
         List<IWebElement> scrapedItems = this.ScrapItems();
         foreach (IWebElement webItem in scrapedItems)
         {
             string title = this.GetTitle(webItem);
             Price price = this.GetPrice(webItem);
-            items.Add(new Item(title, price));
+            items.Add(new StandardItem(title, price));
         }
         this.FinishScraping();
         return items;
