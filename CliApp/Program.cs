@@ -3,15 +3,15 @@
 Console.WriteLine("Enter item to search:");
 String toSearch = Console.ReadLine() ?? throw new Exception();
 
-User[] users = {
-    new User("Jhon", "Doe", "jhon_doe@mail.az", new AmazonScraper()), 
-    new User("Donald", "Trump", "donald_j_trump@yande.ru", new TapAzScraper()),
-    new User("Jack", "Ripper", "bestSeller@gmail.com", new TrendyolScraper()),
+Buyer[] buyers = {
+    new Buyer("Jhon", "Doe", "jhon_doe@mail.az", new AmazonScraper()), 
+    new Buyer("Donald", "Trump", "donald_j_trump@yande.ru", new TapAzScraper()),
+    new Buyer("Jack", "Ripper", "bestSeller@gmail.com", new TrendyolScraper()),
 };
 
-foreach (User user in users)
+foreach (Buyer buyer in buyers)
 {
-    List<IItem> items = user.Search(toSearch);
+    List<IItem> items = buyer.Search(toSearch);
     foreach (IItem item in items) {
         System.Console.WriteLine($"Title: {item.Title}\nPrice: {item.Price}\n");
     }
