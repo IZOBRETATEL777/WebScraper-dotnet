@@ -16,11 +16,19 @@ public class AmazonScraper : ScraperTemplate
 
     public override void SearchItemsByPattern(string pattern)
     {
-        IWebElement element = Driver.FindElement(By.XPath("//*[@id='twotabsearchtextbox']"));
-        element.SendKeys(pattern);
-        element = Driver.FindElement(By.XPath("//*[@id='nav-search-submit-button']"));
-        element.Click();
-    }
+        IWebElement element;
+        try
+        {
+            element = Driver.FindElement(By.XPath("//*[@id='twotabsearchtextbox']"));
+            element.SendKeys(pattern);
+            element = Driver.FindElement(By.XPath("//*[@id='nav-search-submit-button']"));
+            element.Click();
+        }
+        catch (Exception)
+        {
+            Console.WriteLine("Cannot create search query on Amazon.com!");
+        }
+   }
 
     protected override List<IWebElement> ScrapItems()
     {

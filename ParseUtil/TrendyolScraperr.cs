@@ -16,11 +16,20 @@ public class TrendyolScraper : ScraperTemplate
 
     public override void SearchItemsByPattern(string pattern)
     {
-        IWebElement element = this.Driver.FindElement(By.XPath("//*[@id='search']"));
-        element.SendKeys(pattern);
-        element = this.Driver.FindElement(By.XPath("//*[@id='tydortyuzdortpage']/div/div/div[4]/form/div/div[2]/button"));
-        element.Click();
-    }
+        IWebElement element;
+        try
+        {
+            element = this.Driver.FindElement(By.XPath("//*[@id='search']"));
+            element.SendKeys(pattern);
+            element = this.Driver.FindElement(By.XPath("//*[@id='tydortyuzdortpage']/div/div/div[4]/form/div/div[2]/button"));
+            element.Click();
+            
+        }
+        catch (Exception)
+        {
+            Console.WriteLine("Cannot create search query on Trendyol.com!");
+        }
+   }
 
     protected override List<IWebElement> ScrapItems()
     {

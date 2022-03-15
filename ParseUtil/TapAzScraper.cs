@@ -15,10 +15,18 @@ public class TapAzScraper : ScraperTemplate
 
     public override void SearchItemsByPattern(string pattern)
     {
-        IWebElement element = this.Driver.FindElement(By.XPath("//*[@id='q_keywords']"));
-        element.SendKeys(pattern);
-        element = this.Driver.FindElement(By.ClassName("header-btn_search"));
-        element.Click();
+        IWebElement element;
+        try
+        {
+            element = this.Driver.FindElement(By.XPath("//*[@id='q_keywords']"));
+            element.SendKeys(pattern);
+            element = this.Driver.FindElement(By.ClassName("header-btn_search"));
+            element.Click();
+        }
+        catch
+        {
+            Console.WriteLine("Cannot create search query on Tap.az!");
+        }
     }
 
     protected override List<IWebElement> ScrapItems()
