@@ -59,7 +59,7 @@ public class TrendyolScraper : ScraperTemplate
         String? currency = null;
         try
         {
-            string[] priceCurrency = item.FindElement(By.ClassName("prc-box-sllng")).Text.Split();
+            string[] priceCurrency = item.FindElement(By.ClassName("prc-box-dscntd")).Text.Split();
             value = Decimal.Parse(priceCurrency[0].Replace(".", ""));
             currency = priceCurrency[1];
         }
