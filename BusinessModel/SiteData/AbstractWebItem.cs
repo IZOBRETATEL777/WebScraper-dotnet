@@ -2,7 +2,7 @@ namespace BusinessModel.SiteData;
 
 public abstract class AbstractWebItem
 {
-    public string ItemType { get; }
+    private string ItemType;
     public string Title { get; set; }
     public Price Price { get; set; }
 
@@ -10,5 +10,10 @@ public abstract class AbstractWebItem
         this.ItemType = itemType;
         this.Title = title;
         this.Price = price;
+    }
+
+    public string GetItemType()
+    {
+        return this.ItemType;
     }
 }
