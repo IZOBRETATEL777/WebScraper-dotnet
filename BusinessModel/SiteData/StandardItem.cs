@@ -1,4 +1,4 @@
-namespace ParseUtil.SiteData;
+namespace BusinessModel.SiteData;
 
 public class StandardItem: IItem
 {

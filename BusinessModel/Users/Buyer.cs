@@ -1,4 +1,4 @@
-namespace ParseUtil.Users;
+namespace BusinessModel.Users;
 
 using Scrapers;
 using SiteData;
