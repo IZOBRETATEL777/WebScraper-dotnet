@@ -1,4 +1,4 @@
-namespace ParseUtil;
+namespace ParseUtil.SiteData;
 
 public interface IItem
 {

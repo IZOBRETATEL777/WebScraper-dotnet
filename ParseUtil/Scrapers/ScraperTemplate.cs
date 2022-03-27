@@ -1,5 +1,8 @@
-namespace ParseUtil;
+namespace ParseUtil.Scrapers;
+
 using OpenQA.Selenium;
+
+using SiteData;
 
 public abstract class ScraperTemplate
 {

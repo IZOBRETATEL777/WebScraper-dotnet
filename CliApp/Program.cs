@@ -1,4 +1,6 @@
-﻿using ParseUtil;
+﻿using ParseUtil.Scrapers;
+using ParseUtil.Users;
+using ParseUtil.SiteData;
 
 Console.WriteLine("Enter item to search:");
 String toSearch = Console.ReadLine() ?? throw new Exception();

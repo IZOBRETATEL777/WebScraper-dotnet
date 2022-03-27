@@ -1,4 +1,7 @@
-namespace ParseUtil;
+namespace ParseUtil.Users;
+
+using Scrapers;
+using SiteData;
 
 public class Buyer: User
 {

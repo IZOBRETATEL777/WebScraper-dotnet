@@ -1,17 +1,19 @@
-namespace ParseUtil;
+namespace ParseUtil.Scrapers;
 
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 
-public class AmazonScraper : ScraperTemplate
+using SiteData;
+
+public class TrendyolScraper : ScraperTemplate
 {
     private IWebDriver Driver;
 
-    public AmazonScraper()
+    public TrendyolScraper()
     {
         this.Driver = new ChromeDriver();
-        Driver.Navigate().GoToUrl("https://www.amazon.in/");
-
+        Driver.Navigate().GoToUrl("https://www.trendyol.com/az");
+        Driver.Navigate().Refresh();
     }
 
     public override void SearchItemsByPattern(string pattern)
@@ -19,14 +21,15 @@ public class AmazonScraper : ScraperTemplate
         IWebElement element;
         try
         {
-            element = Driver.FindElement(By.XPath("//*[@id='twotabsearchtextbox']"));
+            element = this.Driver.FindElement(By.XPath("//*[@id='search']"));
             element.SendKeys(pattern);
-            element = Driver.FindElement(By.XPath("//*[@id='nav-search-submit-button']"));
+            element = this.Driver.FindElement(By.XPath("//*[@id='tydortyuzdortpage']/div/div/div[4]/form/div/div[2]/button"));
             element.Click();
+            
         }
         catch (Exception)
         {
-            Console.WriteLine("Cannot create search query on Amazon.com!");
+            Console.WriteLine("Cannot create search query on Trendyol.com!");
         }
    }
 
@@ -34,11 +37,11 @@ public class AmazonScraper : ScraperTemplate
     {
         List<IWebElement> items = new List<IWebElement>();
 
-        for (int itemCount = 2; itemCount < 12; itemCount++)
+        for (int itemCount = 1; itemCount < 11; itemCount++)
         {
             try
             {
-                string xPathItem = $"//*[@id='search']/div[1]/div[1]/div/span[3]/div[2]/div[{itemCount}]/div/div/div/div/div";
+                string xPathItem = $"//*[@id='search-app']/div/div[1]/div[2]/div[3]/div/div[{itemCount}]";
                 IWebElement item = this.Driver.FindElement(By.XPath(xPathItem));
                 items.Add(item);
             }
@@ -54,21 +57,23 @@ public class AmazonScraper : ScraperTemplate
     protected override Price GetPrice(IWebElement item)
     {
 
-        Price price = new Price();
+        Decimal? value = null;
+        String? currency = null;
         try
         {
-            price.Value = Decimal.Parse(item.FindElement(By.ClassName("a-price-whole")).Text);
-            price.Currency = item.FindElement(By.ClassName("a-price-symbol")).Text;
+            string[] priceCurrency = item.FindElement(By.ClassName("prc-box-dscntd")).Text.Split();
+            value = Decimal.Parse(priceCurrency[0].Replace(".", ""));
+            currency = priceCurrency[1];
         }
         catch (Exception)
         {
         }
-        return price;
+        return new Price(value, currency);
     }
 
     protected override string GetTitle(IWebElement item)
     {
-        string title = item.FindElement(By.ClassName("a-text-normal")).Text;
+        string title = item.FindElement(By.ClassName("prdct-desc-cntnr-name")).Text;
         return title;
     }
 

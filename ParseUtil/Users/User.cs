@@ -1,4 +1,4 @@
-namespace ParseUtil;
+namespace ParseUtil.Users;
 
 public abstract class User
 {

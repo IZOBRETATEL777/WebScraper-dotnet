@@ -1,7 +1,9 @@
-namespace ParseUtil;
+namespace ParseUtil.Scrapers;
 
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+
+using SiteData;
 
 public class TapAzScraper : ScraperTemplate
 {
