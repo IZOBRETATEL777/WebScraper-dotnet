@@ -80,7 +80,7 @@ public class TrendyolScraper : ScraperTemplate, IScrapable
     protected override TrendyolItem ConvertToItem(IWebElement webElement)
     {
         return new TrendyolItem(
-            "terndyol",
+            "trendyol",
             GetTitle(webElement),
             GetPrice(webElement)
         );
