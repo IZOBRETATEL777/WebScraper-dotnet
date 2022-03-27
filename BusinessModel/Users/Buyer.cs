@@ -12,7 +12,7 @@ public class Buyer: User
         this.Scraper = scraper;
     }
 
-    public List<IItem> Search(string toSearch)
+    public List<AbstractWebItem> Search(string toSearch)
     {
         this.Scraper.SearchItemsByPattern(toSearch);
         return this.Scraper.GetItems();

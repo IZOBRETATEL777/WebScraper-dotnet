@@ -5,7 +5,7 @@ using OpenQA.Selenium.Chrome;
 
 using SiteData;
 
-public class AmazonScraper : ScraperTemplate
+public class AmazonScraper : ScraperTemplate, IScrapable
 {
     private IWebDriver Driver;
 
@@ -53,7 +53,7 @@ public class AmazonScraper : ScraperTemplate
         return items;
     }
 
-    protected override Price GetPrice(IWebElement item)
+    public Price GetPrice(IWebElement item)
     {
 
         Price price = new Price();
@@ -68,12 +68,19 @@ public class AmazonScraper : ScraperTemplate
         return price;
     }
 
-    protected override string GetTitle(IWebElement item)
+    public string GetTitle(IWebElement item)
     {
         string title = item.FindElement(By.ClassName("a-text-normal")).Text;
         return title;
     }
-
+    protected override AmazonItem ConvertToItem(IWebElement webElement)
+    {
+        return new AmazonItem(
+            "amazon",
+            GetTitle(webElement),
+            GetPrice(webElement)
+        );
+    }
     protected override void FinishScraping()
     {
         this.Driver.Quit();
