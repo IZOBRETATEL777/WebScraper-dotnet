@@ -54,7 +54,7 @@ public class TrendyolScraper : ScraperTemplate
         return items;
     }
 
-    protected override Price GetPrice(IWebElement item)
+    protected Price GetPrice(IWebElement item)
     {
 
         Decimal? value = null;
@@ -71,10 +71,19 @@ public class TrendyolScraper : ScraperTemplate
         return new Price(value, currency);
     }
 
-    protected override string GetTitle(IWebElement item)
+    protected string GetTitle(IWebElement item)
     {
         string title = item.FindElement(By.ClassName("prdct-desc-cntnr-name")).Text;
         return title;
+    }
+
+    protected override TrendyolItem ConvertToItem(IWebElement webElement)
+    {
+        return new TrendyolItem(
+            "terndyol",
+            GetTitle(webElement),
+            GetPrice(webElement)
+        );
     }
 
     protected override void FinishScraping()

@@ -52,7 +52,7 @@ public class TapAzScraper : ScraperTemplate
         return items;
     }
 
-    protected override Price GetPrice(IWebElement item)
+    protected Price GetPrice(IWebElement item)
     {
         Price price = new Price();
         try
@@ -66,10 +66,19 @@ public class TapAzScraper : ScraperTemplate
         return price;
     }
 
-    protected override string GetTitle(IWebElement item)
+    protected string GetTitle(IWebElement item)
     {
         string title = item.FindElement(By.ClassName("products-name")).Text;
         return title;
+    }
+
+    protected override TapAzItem ConvertToItem(IWebElement webElement)
+    {
+        return new TapAzItem(
+            "tapaz",
+            GetTitle(webElement),
+            GetPrice(webElement)
+        );
     }
 
     protected override void FinishScraping()

@@ -53,7 +53,7 @@ public class AmazonScraper : ScraperTemplate
         return items;
     }
 
-    protected override Price GetPrice(IWebElement item)
+    protected Price GetPrice(IWebElement item)
     {
 
         Price price = new Price();
@@ -68,12 +68,19 @@ public class AmazonScraper : ScraperTemplate
         return price;
     }
 
-    protected override string GetTitle(IWebElement item)
+    protected string GetTitle(IWebElement item)
     {
         string title = item.FindElement(By.ClassName("a-text-normal")).Text;
         return title;
     }
-
+    protected override AmazonItem ConvertToItem(IWebElement webElement)
+    {
+        return new AmazonItem(
+            "amazon",
+            GetTitle(webElement),
+            GetPrice(webElement)
+        );
+    }
     protected override void FinishScraping()
     {
         this.Driver.Quit();

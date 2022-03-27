@@ -13,8 +13,8 @@ Buyer[] buyers = {
 
 foreach (Buyer buyer in buyers)
 {
-    List<IItem> items = buyer.Search(toSearch);
-    foreach (IItem item in items) {
+    List<AbstractWebItem> items = buyer.Search(toSearch);
+    foreach (AbstractWebItem item in items) {
         System.Console.WriteLine($"Title: {item.Title}\nPrice: {item.Price}\n");
     }
 }

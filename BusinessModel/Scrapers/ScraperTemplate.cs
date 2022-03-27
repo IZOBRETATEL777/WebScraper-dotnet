@@ -6,22 +6,19 @@ using SiteData;
 
 public abstract class ScraperTemplate
 {
-    public List<IItem> GetItems()
+    public List<AbstractWebItem> GetItems()
     {
-        List<IItem> items = new List<IItem>();
+        List<AbstractWebItem> items = new List<AbstractWebItem>();
         List<IWebElement> scrapedItems = this.ScrapItems();
-        foreach (IWebElement webItem in scrapedItems)
+        foreach (IWebElement webElement in scrapedItems)
         {
-            string title = this.GetTitle(webItem);
-            Price price = this.GetPrice(webItem);
-            items.Add(new StandardItem(title, price));
+            items.Add(ConvertToItem(webElement));
         }
         this.FinishScraping();
         return items;
     }
     public abstract void SearchItemsByPattern(string pattern);
     protected abstract List<IWebElement> ScrapItems();
-    protected abstract Price GetPrice(IWebElement item);
-    protected abstract string GetTitle(IWebElement item);
+    protected abstract AbstractWebItem ConvertToItem(IWebElement item);
     protected abstract void FinishScraping();
 }
