@@ -5,7 +5,7 @@ using OpenQA.Selenium.Chrome;
 
 using SiteData;
 
-public class TrendyolScraper : ScraperTemplate, IScrapable
+public class TrendyolScraper : ScraperTemplate
 {
     private IWebDriver Driver;
 
@@ -54,7 +54,7 @@ public class TrendyolScraper : ScraperTemplate, IScrapable
         return items;
     }
 
-    public Price GetPrice(IWebElement item)
+    protected Price GetPrice(IWebElement item)
     {
 
         Decimal? value = null;
@@ -71,7 +71,7 @@ public class TrendyolScraper : ScraperTemplate, IScrapable
         return new Price(value, currency);
     }
 
-    public string GetTitle(IWebElement item)
+    protected string GetTitle(IWebElement item)
     {
         string title = item.FindElement(By.ClassName("prdct-desc-cntnr-name")).Text;
         return title;

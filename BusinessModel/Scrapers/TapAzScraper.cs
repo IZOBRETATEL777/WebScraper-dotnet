@@ -5,7 +5,7 @@ using OpenQA.Selenium.Chrome;
 
 using SiteData;
 
-public class TapAzScraper : ScraperTemplate, IScrapable
+public class TapAzScraper : ScraperTemplate
 {
     private IWebDriver Driver;
 
@@ -52,7 +52,7 @@ public class TapAzScraper : ScraperTemplate, IScrapable
         return items;
     }
 
-    public Price GetPrice(IWebElement item)
+    protected Price GetPrice(IWebElement item)
     {
         Price price = new Price();
         try
@@ -66,7 +66,7 @@ public class TapAzScraper : ScraperTemplate, IScrapable
         return price;
     }
 
-    public string GetTitle(IWebElement item)
+    protected string GetTitle(IWebElement item)
     {
         string title = item.FindElement(By.ClassName("products-name")).Text;
         return title;

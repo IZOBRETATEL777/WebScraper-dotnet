@@ -5,7 +5,7 @@ using OpenQA.Selenium.Chrome;
 
 using SiteData;
 
-public class AmazonScraper : ScraperTemplate, IScrapable
+public class AmazonScraper : ScraperTemplate
 {
     private IWebDriver Driver;
 
@@ -53,7 +53,7 @@ public class AmazonScraper : ScraperTemplate, IScrapable
         return items;
     }
 
-    public Price GetPrice(IWebElement item)
+    protected Price GetPrice(IWebElement item)
     {
 
         Price price = new Price();
@@ -68,7 +68,7 @@ public class AmazonScraper : ScraperTemplate, IScrapable
         return price;
     }
 
-    public string GetTitle(IWebElement item)
+    protected string GetTitle(IWebElement item)
     {
         string title = item.FindElement(By.ClassName("a-text-normal")).Text;
         return title;
