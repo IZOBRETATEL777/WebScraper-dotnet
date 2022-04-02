@@ -12,10 +12,21 @@ TODO add logic to show the correct result
     <h3>Request</h3>
     <p>@ViewBag.Request</p>
 }
-<h3>В списке @ViewBag.Countries.Count элемента:</h3>
-<ul>
-    @foreach (string country in ViewBag.Countries)
-    {
-        <li>@country</li>
-    }
-</ul>
+<h3>В списке @ViewBag.Items.Count элемента:</h3>
+<table style=" font-family: arial, sans-serif; border-collapse: collapse; width: 100%;">
+    <thead>
+        <th style="  border: 1px solid #dddddd;  text-align: left;  padding: 8px;">Store</th>
+        <th style="  border: 1px solid #dddddd;  text-align: left;  padding: 8px;">Title</th>
+        <th style="  border: 1px solid #dddddd;  text-align: left;  padding: 8px;">Price</th>
+    </thead>
+    <tbody>
+        @foreach (AbstractWebItem item in ViewBag.Items)
+        {
+            <tr>
+                <td style="  border: 1px solid #dddddd;  text-align: left;  padding: 8px;">@item.GetItemType()</td>
+                <td style="  border: 1px solid #dddddd;  text-align: left;  padding: 8px;">@item.Title</td>
+                <td style="  border: 1px solid #dddddd;  text-align: left;  padding: 8px;">@item.Price</td>
+            </tr>
+        }
+    </tbody>
+</table>
