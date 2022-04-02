@@ -1,8 +1,9 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@model SearchModel
+<form asp-controller="Search" asp-action="SearchItem" method="post">
+    <label asp-for="ToSearch">Enter item name</label>
+    <input type="text" asp-for="ToSearch" placeholder="Search for item">
+    <input type="submit">
+</form>
