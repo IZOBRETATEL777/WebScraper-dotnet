@@ -12,7 +12,7 @@ public class AmazonScraper : ScraperTemplate
     public AmazonScraper()
     {
         this.Driver = new ChromeDriver();
-        Driver.Navigate().GoToUrl("https://www.amazon.com/");
+        Driver.Navigate().GoToUrl("https://www.amazon.in/");
 
     }
 
@@ -61,13 +61,9 @@ public class AmazonScraper : ScraperTemplate
         {
             price.Value = Decimal.Parse(item.FindElement(By.ClassName("a-price-whole")).Text);
             price.Currency = item.FindElement(By.ClassName("a-price-symbol")).Text;
-
-           Console.WriteLine("Type: " + price.Value.GetType());
         }
         catch (Exception)
         {
-            price.Value = 0;
-            price.Currency = "USD";
         }
         return price;
     }
