@@ -10,18 +10,22 @@ public class PriceComparer : IComparer<AbstractWebItem>
     // Compares 2 AbstractWebItem classes in asceending order.
     public int Compare(AbstractWebItem? x,
                        AbstractWebItem? y)
-    {   if (x == null || (x.Price == null) && (y == null || y.Price == null))
+    {   
+        Double? xPrice = x.Price.getCommonPrice();
+        Double? yPrice = y.Price.getCommonPrice();
+
+        if (x == null || (xPrice == null) && (y == null || yPrice == null))
             return 0;
-        if (x == null || x.Price == null)
+        if (x == null || xPrice == null)
             return 1;
-        if (y == null || y.Price == null)
+        if (y == null || yPrice == null)
             return -1;
         // return 0 if prices are equal
-        if (x.Price.Value == y.Price.Value)
+        if (xPrice == yPrice)
             return 0;
         
         // return 1 if x is more than y
-        if (x.Price.Value > y.Price.Value)
+        if (xPrice > yPrice)
             return 1;
         
         // return -1 if y is more than x

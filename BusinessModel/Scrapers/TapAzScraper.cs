@@ -8,6 +8,7 @@ using SiteData;
 public class TapAzScraper : ScraperTemplate
 {
     private IWebDriver Driver;
+    private PriceFactory factory = new ConcretePriceFactory();
 
     public TapAzScraper()
     {
@@ -52,17 +53,21 @@ public class TapAzScraper : ScraperTemplate
         return items;
     }
 
-    protected Price GetPrice(IWebElement item)
+    protected IPrice GetPrice(IWebElement item)
     {
-        Price price = new Price();
+        Decimal Value = 0;
+        String Currency = "USD";
         try
         {
-            price.Value = Decimal.Parse(item.FindElement(By.ClassName("price-val")).Text.Replace(" ", ""));
-            price.Currency = item.FindElement(By.ClassName("price-cur")).Text;
+            Value = Decimal.Parse(item.FindElement(By.ClassName("price-val")).Text.Replace(" ", ""));
+            Currency = item.FindElement(By.ClassName("price-cur")).Text;
         }
         catch (Exception)
         {
         }
+        IPrice price = factory.GetCurrency(Value, Currency);
+        Console.WriteLine("Price: " + price.Value);
+
         return price;
     }
 
