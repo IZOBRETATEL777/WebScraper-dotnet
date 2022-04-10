@@ -1,4 +1,9 @@
+using WebApp.Services;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// DI
+builder.Services.AddScoped<ISearchItemService, SearchItemServiceImpl>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
