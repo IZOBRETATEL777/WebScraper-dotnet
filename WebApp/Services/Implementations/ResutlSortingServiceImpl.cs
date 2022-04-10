@@ -1,10 +1,10 @@
 namespace WebApp.Services;
-using BusinessModel.SiteData;
+using BusinessModel.Representation;
 using BusinessModel.Comparers;
 
 public class ResutlSortingServiceImpl : IResutlSorting
 {
-    public List<AbstractWebItem> ApplySorting(List<AbstractWebItem> items, string[] args)
+    public List<IRepresentableItem> ApplySorting(List<IRepresentableItem> items, string[] args)
     {
         SortingChain sortingChain = new SortingChain(items);
         foreach (string arg in args)

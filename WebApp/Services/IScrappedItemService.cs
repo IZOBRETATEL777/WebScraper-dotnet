@@ -1,9 +1,10 @@
 using BusinessModel.SiteData;
+using BusinessModel.Representation;
 
 namespace WebApp.Services
 {
     public interface ISearchItemService
     {
-        List<AbstractWebItem> FindItemByTitle(string title);
+        List<IRepresentableItem> FindItemByTitle(string title);
     }
 }

@@ -9,11 +9,11 @@ class TrendyolItemAdapter : IRepresentableItem
     {
         this.item = item;
     }
-    public string getShortTitle()
+    public string GetShortTitle()
     {
-        return item.Title.Substring(0, item.Title.Length > 10 ? 10 : item.Title.Length);
+        return item.Title.Substring(0, item.Title.Length > 50 ? 50 : item.Title.Length);
     }
-    public Price getPriceInManats()
+    public Price GetPriceInManats()
     {
         Price convertedPrice = new Price();
         convertedPrice.Currency = "AZN";
@@ -22,5 +22,10 @@ class TrendyolItemAdapter : IRepresentableItem
             convertedPrice.Value = item.Price.Value * (decimal)0.12;
         }
         return convertedPrice;
+    }
+
+    public string GetStore()
+    {
+        return "Trendyol";
     }
 }

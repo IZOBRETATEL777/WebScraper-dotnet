@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Models;
-using BusinessModel.SiteData;
+using BusinessModel.Representation;
 using WebApp.Services;
 
 namespace WebApp.Controllers;
@@ -20,8 +20,8 @@ public class SearchController : Controller
     public IActionResult SearchItem([FromForm] SearchModel searchModel)
     {
 
-        List<AbstractWebItem> scrappedItems = SearchItemService.FindItemByTitle(searchModel.ToSearch);
-        List<AbstractWebItem> sortedItems = ResutlSorting.ApplySorting(scrappedItems, searchModel.SortArgs);
+        List<IRepresentableItem> scrappedItems = SearchItemService.FindItemByTitle(searchModel.ToSearch);
+        List<IRepresentableItem> sortedItems = ResutlSorting.ApplySorting(scrappedItems, searchModel.SortArgs);
         ViewBag.Items = sortedItems;
         return View();
     }

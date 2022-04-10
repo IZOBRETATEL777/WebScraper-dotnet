@@ -3,6 +3,8 @@ using SiteData;
 
 public interface IRepresentableItem
 {
-    string getShortTitle();
-    Price getPriceInManats();
+    string GetShortTitle();
+    Price GetPriceInManats();
+
+    string GetStore();
 }

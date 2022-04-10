@@ -15,12 +15,12 @@
         <th style="  border: 1px solid #dddddd;  text-align: left;  padding: 8px;">Price</th>
     </thead>
     <tbody>
-        @foreach (AbstractWebItem item in ViewBag.Items)
+        @foreach (IRepresentableItem item in ViewBag.Items)
         {
             <tr>
-                <td style="  border: 1px solid #dddddd;  text-align: left;  padding: 8px;">@item.GetItemType()</td>
-                <td style="  border: 1px solid #dddddd;  text-align: left;  padding: 8px;">@item.Title</td>
-                <td style="  border: 1px solid #dddddd;  text-align: left;  padding: 8px;">@item.Price</td>
+                <td style="  border: 1px solid #dddddd;  text-align: left;  padding: 8px;">@item.GetStore()</td>
+                <td style="  border: 1px solid #dddddd;  text-align: left;  padding: 8px;">@item.GetShortTitle()</td>
+                <td style="  border: 1px solid #dddddd;  text-align: left;  padding: 8px;">@item.GetPriceInManats()</td>
             </tr>
         }
     </tbody>

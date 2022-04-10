@@ -1,26 +1,26 @@
 namespace BusinessModel.Comparers;
 
 using System.Collections.Generic;
-using SiteData;
+using Representation;
 
-public class DescendingPriceComparer : IComparer<AbstractWebItem>
+public class DescendingPriceComparer : IComparer<IRepresentableItem>
 {
     // Custom comparator function used in sorting of Scrapped Items.
-    // Compares 2 AbstractWebItem classes in asceending order.
-    public int Compare(AbstractWebItem? x,
-                       AbstractWebItem? y)
-    {   if (x == null || (x.Price == null) && (y == null || y.Price == null))
+    // Compares 2 IRepresentableItem classes in asceending order.
+    public int Compare(IRepresentableItem? x,
+                       IRepresentableItem? y)
+    {   if (x == null || (x.GetPriceInManats() == null) && (y == null || y.GetPriceInManats() == null))
             return 0;
-        if (x == null || x.Price == null)
+        if (x == null || x.GetPriceInManats() == null)
             return -1;
-        if (y == null || y.Price == null)
+        if (y == null || y.GetPriceInManats() == null)
             return 1;
         // return 0 if prices are equal
-        if (x.Price.Value == y.Price.Value)
+        if (x.GetPriceInManats().Value == y.GetPriceInManats().Value)
             return 0;
         
         // return 1 if x is less than y
-        if (x.Price.Value < y.Price.Value)
+        if (x.GetPriceInManats().Value < y.GetPriceInManats().Value)
             return 1;
         
         // return -1 if y is less than x

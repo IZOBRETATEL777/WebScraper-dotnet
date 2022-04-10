@@ -1,12 +1,12 @@
 namespace BusinessModel.Comparers;
-using SiteData;
+using Representation;
 
 public class SortingChain
 {
-    List<AbstractWebItem> Items;
+    List<IRepresentableItem> Items;
     ComporatorFascade ComparerFascade;
 
-    public SortingChain(List<AbstractWebItem> items)
+    public SortingChain(List<IRepresentableItem> items)
     {
         this.Items = items;
         this.ComparerFascade = new ComporatorFascade();
@@ -16,7 +16,7 @@ public class SortingChain
         return this;
     }
 
-    public List<AbstractWebItem> FinishSorting() {
+    public List<IRepresentableItem> FinishSorting() {
         return this.Items;
     }
     

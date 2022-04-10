@@ -1,8 +1,9 @@
 namespace BusinessModel.Comparers;
-using SiteData;
+using Representation;
+
 public class ComporatorFascade
 {
-    public IComparer<AbstractWebItem> GetComparator(string name)
+    public IComparer<IRepresentableItem> GetComparator(string name)
     {
         switch (name)
         {

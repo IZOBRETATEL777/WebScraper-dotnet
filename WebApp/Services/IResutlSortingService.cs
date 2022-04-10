@@ -1,7 +1,8 @@
 namespace WebApp.Services;
 using BusinessModel.SiteData;
+using BusinessModel.Representation;
 
 public interface IResutlSorting
 {
-    List<AbstractWebItem> ApplySorting(List<AbstractWebItem> items, string[] args);
+    List<IRepresentableItem> ApplySorting(List<IRepresentableItem> items, string[] args);
 }
