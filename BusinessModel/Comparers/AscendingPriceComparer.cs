@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using SiteData;
 
-public class PriceComparer : IComparer<AbstractWebItem>
+public class AscendingPriceComparer : IComparer<AbstractWebItem>
 {
     // Custom comparator function used in sorting of Scrapped Items.
     // Compares 2 AbstractWebItem classes in asceending order.
