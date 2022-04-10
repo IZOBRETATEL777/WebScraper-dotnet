@@ -19,6 +19,7 @@ public class SearchController : Controller
     {
 
         List<AbstractWebItem> scrappedItems = searchItemService.FindItemByTitle(searchModel.ToSearch);
+        System.Console.WriteLine(searchModel.SortArgs.Count());
         ViewBag.Items = scrappedItems;
         return View();
     }

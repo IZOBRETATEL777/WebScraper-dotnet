@@ -5,5 +5,15 @@
 <form asp-controller="Search" asp-action="SearchItem" method="post">
     <label asp-for="ToSearch">Enter item name</label>
     <input type="text" asp-for="ToSearch" placeholder="Search for item">
+    @for (int i = 0; i < 2; i++)
+    {
+        <select asp-for="SortArgs[@i]">
+            <option value="">Select sorting type</option>
+            <option value="price-asc">Price ascending</option>
+            <option value="price-des">Price descending</option>
+            <option value="alp-asc">Alphabetical ascending</option>
+            <option value="alp-des">Alphabetical descending</option>
+        </select>
+    }
     <input type="submit">
 </form>

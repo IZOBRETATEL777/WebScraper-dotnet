@@ -11,7 +11,7 @@ namespace WebApp.Services
         public List<AbstractWebItem> FindItemByTitle(string title)
         {
             List<AbstractWebItem>Items = new List<AbstractWebItem>();
-            ScraperTemplate[] scraper = {new AmazonScraper(), new TapAzScraper(), new TrendyolScraper()};
+            ScraperTemplate[] scraper = {new AmazonScraper()};//, new TapAzScraper(), new TrendyolScraper()};
             foreach (ScraperTemplate scraperTemplate in scraper)
             {
                 scraperTemplate.SearchItemsByPattern(title);
