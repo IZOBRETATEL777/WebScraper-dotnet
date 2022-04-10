@@ -1,0 +1,27 @@
+@{
+    ViewData["Title"] = "Result Page";
+}
+
+@if (ViewBag.Request != null) 
+{
+    <h3>Request</h3>
+    <p>@ViewBag.Request</p>
+}
+<h3>@ViewBag.Items.Count elements found:</h3>
+<table style=" font-family: arial, sans-serif; border-collapse: collapse; width: 100%;">
+    <thead>
+        <th style="  border: 1px solid #dddddd;  text-align: left;  padding: 8px;">Store</th>
+        <th style="  border: 1px solid #dddddd;  text-align: left;  padding: 8px;">Title</th>
+        <th style="  border: 1px solid #dddddd;  text-align: left;  padding: 8px;">Price</th>
+    </thead>
+    <tbody>
+        @foreach (IRepresentableItem item in ViewBag.Items)
+        {
+            <tr>
+                <td style="  border: 1px solid #dddddd;  text-align: left;  padding: 8px;">@item.GetStore()</td>
+                <td style="  border: 1px solid #dddddd;  text-align: left;  padding: 8px;">@item.GetShortTitle()</td>
+                <td style="  border: 1px solid #dddddd;  text-align: left;  padding: 8px;">@item.GetPriceInManats()</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -18,6 +18,6 @@ public class Price
 
     public override string ToString()
     {
-        return $"{this.Value} {this.Currency}";
+       return $"{this.Value} {this.Currency}";
     }
 }
