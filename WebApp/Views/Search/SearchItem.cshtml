@@ -1,18 +1,13 @@
 @{
     ViewData["Title"] = "Result Page";
 }
-@* 
-Examples of ViewBag output
-TODO add logic to show the correct result
- *@
-
 
 @if (ViewBag.Request != null) 
 {
     <h3>Request</h3>
     <p>@ViewBag.Request</p>
 }
-<h3>В списке @ViewBag.Items.Count элемента:</h3>
+<h3>@ViewBag.Items.Count elements found:</h3>
 <table style=" font-family: arial, sans-serif; border-collapse: collapse; width: 100%;">
     <thead>
         <th style="  border: 1px solid #dddddd;  text-align: left;  padding: 8px;">Store</th>
