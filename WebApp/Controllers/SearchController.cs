@@ -7,20 +7,22 @@ namespace WebApp.Controllers;
 
 public class SearchController : Controller
 {
-    private readonly ISearchItemService searchItemService;
+    private readonly ISearchItemService SearchItemService;
+    private readonly IResutlSorting ResutlSorting;
 
-    public SearchController(ISearchItemService searchItemService)
+    public SearchController(ISearchItemService searchItemService, IResutlSorting resutlSorting)
     {
-        this.searchItemService = searchItemService;
+        this.SearchItemService = searchItemService;
+        this.ResutlSorting = resutlSorting;
     }
 
     [HttpPost]
     public IActionResult SearchItem([FromForm] SearchModel searchModel)
     {
 
-        List<AbstractWebItem> scrappedItems = searchItemService.FindItemByTitle(searchModel.ToSearch);
-        System.Console.WriteLine(searchModel.SortArgs.Count());
-        ViewBag.Items = scrappedItems;
+        List<AbstractWebItem> scrappedItems = SearchItemService.FindItemByTitle(searchModel.ToSearch);
+        List<AbstractWebItem> sortedItems = ResutlSorting.ApplySorting(scrappedItems, searchModel.SortArgs);
+        ViewBag.Items = sortedItems;
         return View();
     }
 }

@@ -1,17 +1,17 @@
 namespace BusinessModel.Comparers;
 using SiteData;
 
-public class Sorter
+public class SortingChain
 {
     List<AbstractWebItem> Items;
     ComporatorFascade ComparerFascade;
 
-    public Sorter(List<AbstractWebItem> items)
+    public SortingChain(List<AbstractWebItem> items)
     {
         this.Items = items;
         this.ComparerFascade = new ComporatorFascade();
     }
-    public Sorter ContinueSorting(string parameter) {
+    public SortingChain ContinueSorting(string parameter) {
         Items.Sort(ComparerFascade.GetComparator(parameter));
         return this;
     }
