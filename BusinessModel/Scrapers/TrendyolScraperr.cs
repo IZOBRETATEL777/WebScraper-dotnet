@@ -8,7 +8,6 @@ using SiteData;
 public class TrendyolScraper : ScraperTemplate
 {
     private IWebDriver Driver;
-    private PriceFactory factory = new ConcretePriceFactory();
 
     public TrendyolScraper()
     {
@@ -55,11 +54,11 @@ public class TrendyolScraper : ScraperTemplate
         return items;
     }
 
-    protected IPrice GetPrice(IWebElement item)
+    protected Price GetPrice(IWebElement item)
     {
 
-        Decimal? value = 0;
-        String? currency = "USD";
+        Decimal? value = null;
+        String? currency = null;
         try
         {
             string[] priceCurrency = item.FindElement(By.ClassName("prc-box-dscntd")).Text.Split();
@@ -69,10 +68,7 @@ public class TrendyolScraper : ScraperTemplate
         catch (Exception)
         {
         }
-        IPrice price = factory.GetCurrency(value, currency);
-        Console.WriteLine("Price: " + price.Value);
-        
-        return price;
+        return new Price(value, currency);
     }
 
     protected string GetTitle(IWebElement item)

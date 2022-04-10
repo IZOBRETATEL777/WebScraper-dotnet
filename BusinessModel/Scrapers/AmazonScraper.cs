@@ -8,7 +8,7 @@ using SiteData;
 public class AmazonScraper : ScraperTemplate
 {
     private IWebDriver Driver;
-    private PriceFactory factory = new ConcretePriceFactory();
+
     public AmazonScraper()
     {
         this.Driver = new ChromeDriver();
@@ -53,23 +53,18 @@ public class AmazonScraper : ScraperTemplate
         return items;
     }
 
-    protected IPrice GetPrice(IWebElement item)
+    protected Price GetPrice(IWebElement item)
     {
-        Decimal Value = 0;
-        String Currency = "USD";
+
+        Price price = new Price();
         try
         {
-            Value = Decimal.Parse(item.FindElement(By.ClassName("a-price-whole")).Text);
-            Currency = item.FindElement(By.ClassName("a-price-symbol")).Text;
-            if (Currency == "₹")
-                Currency = "INR";
+            price.Value = Decimal.Parse(item.FindElement(By.ClassName("a-price-whole")).Text);
+            price.Currency = item.FindElement(By.ClassName("a-price-symbol")).Text;
         }
         catch (Exception)
         {
-
         }
-        IPrice price = factory.GetCurrency(Value, Currency);
-        Console.WriteLine("Price: " + price.Value);
         return price;
     }
 

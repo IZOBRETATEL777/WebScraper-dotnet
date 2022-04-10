@@ -4,9 +4,9 @@ public abstract class AbstractWebItem
 {
     private string ItemType;
     public string Title { get; set; }
-    public IPrice Price { get; set; }
+    public Price Price { get; set; }
 
-    public AbstractWebItem(string itemType, string title, IPrice price) {
+    public AbstractWebItem(string itemType, string title, Price price) {
         this.ItemType = itemType;
         this.Title = title;
         this.Price = price;
