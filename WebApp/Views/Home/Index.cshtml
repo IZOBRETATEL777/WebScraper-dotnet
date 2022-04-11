@@ -7,7 +7,7 @@
     <input type="text" asp-for="ToSearch" placeholder="Search for item">
     @for (int i = 0; i < 2; i++)
     {
-        <select asp-for="SortArgs[@i]">
+        <select asp-for="SortArgs[i]">
             <option value="">Select sorting type</option>
             <option value="price-asc">Price ascending</option>
             <option value="price-des">Price descending</option>
