@@ -12,7 +12,7 @@ public class SortingChain
         this.ComparerFascade = new ComporatorFascade();
     }
     public SortingChain ContinueSorting(string parameter) {
-        Items.Sort(ComparerFascade.GetComparator(parameter));
+        this.Items = this.Items.OrderBy(x => x, this.ComparerFascade.GetComparator(parameter)).ToList();
         return this;
     }
 
