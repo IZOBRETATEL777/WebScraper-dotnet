@@ -1,3 +1,18 @@
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Result Page</title>
+</head>
+
+<style type="text/css">
+  th,
+  tr {
+    width: 25%;
+    text-align: center;
+  }
+</style>
+
+
 @{
     ViewData["Title"] = "Result Page";
 }
@@ -8,7 +23,7 @@
     <p>@ViewBag.Request</p>
 }
 <h3>@ViewBag.Items.Count elements found:</h3>
-<table style=" font-family: arial, sans-serif; border-collapse: collapse; width: 100%;">
+<table style=" font-family: arial, sans-serif; border-collapse: collapse; width: 100%;" class="table table-striped" id="myTable">
     <thead>
         <th style="  border: 1px solid #dddddd;  text-align: left;  padding: 8px;">Store</th>
         <th style="  border: 1px solid #dddddd;  text-align: left;  padding: 8px;">Title</th>
@@ -25,3 +40,24 @@
         }
     </tbody>
 </table>
+<script>
+    const getCellValue = (tr, idx) => {
+      tr.children[idx].innerText || tr.children[idx].textContent;
+      if (tr.children[idx].innerText)
+        return !isNaN(parseFloat(tr.children[idx].innerText)) ? parseFloat(tr.children[idx].innerText) : tr.children[idx].innerText;
+      else
+        return !isNaN(parseFloat(tr.children[idx].textContent)) ? parseFloat(tr.children[idx].textContent) : tr.children[idx].textContent;
+    }
+    
+    const comparer = (idx, asc) => (a, b) => ((v1, v2) =>
+      v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ? v1 - v2 : v1.toString().localeCompare(v2)
+    )(getCellValue(asc ? a : b, idx), getCellValue(asc ? b : a, idx));
+    
+    document.querySelectorAll('th').forEach(th => th.addEventListener('click', (() => {
+      const table = th.closest('table');
+      const tbody = table.querySelector('tbody');
+      Array.from(tbody.querySelectorAll('tr'))
+        .sort(comparer(Array.from(th.parentNode.children).indexOf(th), this.asc = !this.asc))
+        .forEach(tr => tbody.appendChild(tr));
+    })));
+</script>
