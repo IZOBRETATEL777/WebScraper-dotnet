@@ -1,5 +1,6 @@
 namespace BusinessModel.Representation;
 using SiteData;
+using Enum;
 
 class TrendyolItemAdapter : IRepresentableItem
 {
@@ -26,6 +27,6 @@ class TrendyolItemAdapter : IRepresentableItem
 
     public string GetStore()
     {
-        return "Trendyol";
+        return StoresEnum.Trendyol.GetFullName();
     }
 }

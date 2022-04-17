@@ -1,5 +1,6 @@
 namespace BusinessModel.Representation;
 using SiteData;
+using Enum;
 
 class AmazonItemAdapter : IRepresentableItem
 {
@@ -26,6 +27,6 @@ class AmazonItemAdapter : IRepresentableItem
 
     public string GetStore()
     {
-        return "Amazon";
+        return StoresEnum.Amazon.GetFullName();
     }
 }

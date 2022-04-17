@@ -1,5 +1,6 @@
 namespace BusinessModel.Representation;
 using SiteData;
+using Enum;
 
 class TapAzItemAdapter : IRepresentableItem
 {
@@ -20,6 +21,6 @@ class TapAzItemAdapter : IRepresentableItem
 
     public string GetStore()
     {
-        return "Tap.az";
+        return StoresEnum.Tapaz.GetFullName();
     }
 }

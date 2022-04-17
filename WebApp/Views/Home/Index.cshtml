@@ -5,8 +5,9 @@
 <form asp-controller="Search" asp-action="SearchItem" method="post">
     <label asp-for="ToSearch">Enter item name</label>
     <input type="text" asp-for="ToSearch" placeholder="Search for item">
-    <input type="checkbox" asp-for="UsedSites[StoresEnum.Amazon.GetShortName()]" checked>Use Amazon
-    <input type="checkbox" asp-for="UsedSites[StoresEnum.Tapaz.GetShortName()]" checked> Use Tap.az
-    <input type="checkbox" asp-for="UsedSites[StoresEnum.Trendyol.GetShortName()]" checked> Use Trendyol
+    @foreach (StoresEnum store in Enum.GetValues(typeof(StoresEnum)))
+    {
+        <input type="checkbox" asp-for="UsedSites[store.GetShortName()]" checked> @store.GetFullName()
+    }
     <input type="submit">
 </form>
