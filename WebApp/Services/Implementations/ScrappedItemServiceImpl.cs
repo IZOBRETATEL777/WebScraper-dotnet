@@ -9,12 +9,24 @@ namespace WebApp.Services
         public SearchItemServiceImpl()
         {
         }
-        public List<IRepresentableItem> FindItemByTitle(string title)
+        public List<IRepresentableItem> FindItemByTitle(string title, Dictionary < string, bool > usedSites)
         {
             List<IRepresentableItem>items = new List<IRepresentableItem>();
             RepresentationFacad representationFacad = new RepresentationFacad();
-            ScraperTemplate[] scraper = {new AmazonScraper(), new TapAzScraper(), new TrendyolScraper()};
-            foreach (ScraperTemplate scraperTemplate in scraper)
+            List<ScraperTemplate> scrapers = new List<ScraperTemplate>();
+            if (usedSites["amazon"])
+            {
+                scrapers.Add(new AmazonScraper());
+            }
+            if (usedSites["tapaz"])
+            {
+                scrapers.Add(new TapAzScraper());
+            }
+            if (usedSites["trendyol"])
+            {
+                scrapers.Add(new TrendyolScraper());
+            }
+            foreach (ScraperTemplate scraperTemplate in scrapers)
             {
                 scraperTemplate.SearchItemsByPattern(title);
                 foreach (AbstractWebItem item in scraperTemplate.GetItems())

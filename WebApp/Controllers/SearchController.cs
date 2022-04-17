@@ -17,8 +17,7 @@ public class SearchController : Controller
     [HttpPost]
     public IActionResult SearchItem([FromForm] SearchModel searchModel)
     {
-
-        ViewBag.Items = SearchItemService.FindItemByTitle(searchModel.ToSearch);;
+        ViewBag.Items = SearchItemService.FindItemByTitle(searchModel.ToSearch, searchModel.UsedSites);
         return View();
     }
 }

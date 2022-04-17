@@ -5,5 +5,8 @@
 <form asp-controller="Search" asp-action="SearchItem" method="post">
     <label asp-for="ToSearch">Enter item name</label>
     <input type="text" asp-for="ToSearch" placeholder="Search for item">
+    <input type="checkbox" asp-for="UsedSites[StoresEnum.Amazon.GetShortName()]">Use Amazon
+    <input type="checkbox" asp-for="UsedSites[StoresEnum.Tapaz.GetShortName()]"> Use Tap.az
+    <input type="checkbox" asp-for="UsedSites[StoresEnum.Trendyol.GetShortName()]"> Use Trendyol
     <input type="submit">
 </form>
