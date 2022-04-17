@@ -17,11 +17,11 @@ app.UseRouting();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}"
+    pattern: "{controller=Search}/{action=SearchPage}"
 );
 app.MapControllerRoute(
     name: "search",
-    pattern: "{controller=Search}/{action=SearchItem}"
+    pattern: "{controller=Result}/{action=ResultPage}"
 );
 
 app.Run();

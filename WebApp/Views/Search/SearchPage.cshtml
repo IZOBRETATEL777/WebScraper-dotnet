@@ -2,7 +2,7 @@
     ViewData["Title"] = "Home Page";
 }
 @model SearchModel
-<form asp-controller="Search" asp-action="SearchItem" method="post">
+<form asp-controller="Result" asp-action="ResultPage" method="post">
     <label asp-for="ToSearch">Enter item name</label>
     <input type="text" asp-for="ToSearch" placeholder="Search for item">
     @foreach (StoresEnum store in Enum.GetValues(typeof(StoresEnum)))
