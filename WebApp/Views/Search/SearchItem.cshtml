@@ -49,9 +49,11 @@
 </table>
 <script>
     const getCellValue = (tr, idx) => {
-      tr.children[idx].innerText || tr.children[idx].textContent;
+      tr.children[idx].innerText || tr.children[idx].outerText || tr.children[idx].textContent;
       if (tr.children[idx].innerText)
         return !isNaN(parseFloat(tr.children[idx].innerText)) ? parseFloat(tr.children[idx].innerText) : tr.children[idx].innerText;
+      else if(tr.children[idx].outerText)
+        return !isNaN(parseFloat(tr.children[idx].outerText)) ? parseFloat(tr.children[idx].outerText) : tr.children[idx].outerText;
       else
         return !isNaN(parseFloat(tr.children[idx].textContent)) ? parseFloat(tr.children[idx].textContent) : tr.children[idx].textContent;
     }
