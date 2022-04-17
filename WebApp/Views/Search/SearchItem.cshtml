@@ -12,26 +12,23 @@
   }
 </style>
 
-
-@{
-    ViewData["Title"] = "Result Page";
-}
-
 @if (ViewBag.Request != null) 
 {
     <h3>Request</h3>
     <p>@ViewBag.Request</p>
 }
 
-<form>
+<div>
 @foreach (string site in ViewBag.Sites)
 {
-    <input type="checkbox" value="@site"> @site<br>
+    <input type="checkbox" id="@site" class="site-checkbox">
+    <label>
+      @site
+    </label>
 }
-<input type="submit">
-</form>
+</div>
 
-<h3>Total: ## elements</h3>
+<h3 id="H3"></h3>
 
 <table style=" font-family: arial, sans-serif; border-collapse: collapse; width: 100%;" class="table table-striped" id="myTable">
     <thead>
@@ -70,4 +67,35 @@
         .sort(comparer(Array.from(th.parentNode.children).indexOf(th), this.asc = !this.asc))
         .forEach(tr => tbody.appendChild(tr));
     })));
+
+    const countTD = () => {
+      let count = 0;
+      document.querySelectorAll('#myTable > tbody > tr').forEach(tr => {
+        if (tr.getAttribute('hidden') == null) {
+          count++;
+        }
+      }
+      );
+      return count;
+    }
+
+    const filter = (site) => {
+      const trs = document.querySelectorAll('#myTable > tbody > tr'),
+        tds = document.querySelectorAll('#myTable > tbody > tr > td:nth-child(1)');
+      for (let elem in tds) {
+        const td = tds[elem].outerText;
+        if (`${td}`.toLowerCase() == `${site}`.toLowerCase())
+          trs[elem].toggleAttribute('hidden');
+      }
+    }
+
+    document.getElementById('H3').innerText = countTD() + ' elements found:';
+
+    document.querySelectorAll('body > div > .site-checkbox').forEach(elem => {
+      elem.addEventListener('click', () => {
+        const id = elem.getAttribute('id');
+        filter(id);
+        document.getElementById('H3').innerText = countTD() + ' elements found:';
+      });
+    });
 </script>
