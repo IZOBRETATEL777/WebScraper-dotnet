@@ -4,7 +4,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 // DI
 builder.Services.AddScoped<ISearchItemService, SearchItemServiceImpl>();
-builder.Services.AddScoped<IResutlSorting, ResutlSortingServiceImpl>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
