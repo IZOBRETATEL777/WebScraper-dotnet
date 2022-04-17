@@ -18,6 +18,7 @@ public class SearchController : Controller
     public IActionResult SearchItem([FromForm] SearchModel searchModel)
     {
         ViewBag.Items = SearchItemService.FindItemByTitle(searchModel.ToSearch, searchModel.UsedSites);
+        ViewBag.Sites = searchModel.UsedSites.Where(x => x.Value).Select(x => x.Key).ToList();
         return View();
     }
 }
