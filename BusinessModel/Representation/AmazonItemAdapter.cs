@@ -20,7 +20,7 @@ class AmazonItemAdapter : IRepresentableItem
         convertedPrice.Currency = "AZN";
         if (item.Price.Value != null)
         {
-            convertedPrice.Value = item.Price.Value * (decimal)0.022;
+            convertedPrice.Value = item.Price.Value * (decimal)0.02;
         }
         return convertedPrice;
     }
