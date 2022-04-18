@@ -1,5 +1,6 @@
 namespace BusinessModel.Representation;
 using SiteData;
+using Enum;
 
 class AmazonItemAdapter : IRepresentableItem
 {
@@ -19,13 +20,13 @@ class AmazonItemAdapter : IRepresentableItem
         convertedPrice.Currency = "AZN";
         if (item.Price.Value != null)
         {
-            convertedPrice.Value = item.Price.Value * (decimal)0.022;
+            convertedPrice.Value = item.Price.Value * (decimal)0.02;
         }
         return convertedPrice;
     }
 
     public string GetStore()
     {
-        return "Amazon";
+        return StoresEnum.Amazon.GetFullName();
     }
 }

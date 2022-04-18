@@ -1,0 +1,103 @@
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Result Page</title>
+</head>
+
+<style type="text/css">
+  th,
+  tr {
+    width: 25%;
+    text-align: center;
+  }
+</style>
+
+@if (ViewBag.Request != null) 
+{
+    <h3>Request</h3>
+    <p>@ViewBag.Request</p>
+}
+
+<div>
+@foreach (string site in ViewBag.Sites)
+{
+    <input type="checkbox" id="@site" class="site-checkbox">
+    <label>
+      @site
+    </label>
+}
+</div>
+
+<h3 id="H3"></h3>
+
+<table style=" font-family: arial, sans-serif; border-collapse: collapse; width: 100%;" class="table table-striped" id="myTable">
+    <thead>
+        <th style="  border: 1px solid #dddddd;  text-align: left;  padding: 8px;">Store</th>
+        <th style="  border: 1px solid #dddddd;  text-align: left;  padding: 8px;">Title</th>
+        <th style="  border: 1px solid #dddddd;  text-align: left;  padding: 8px;">Price</th>
+    </thead>
+    <tbody>
+        @foreach (IRepresentableItem item in ViewBag.Items)
+        {
+            <tr>
+                <td style="  border: 1px solid #dddddd;  text-align: left;  padding: 8px;">@item.GetStore()</td>
+                <td style="  border: 1px solid #dddddd;  text-align: left;  padding: 8px;">@item.GetShortTitle()</td>
+                <td style="  border: 1px solid #dddddd;  text-align: left;  padding: 8px;">@item.GetPriceInManats()</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script>
+    const getCellValue = (tr, idx) => {
+      tr.children[idx].innerText || tr.children[idx].outerText || tr.children[idx].textContent;
+      if (tr.children[idx].innerText)
+        return !isNaN(parseFloat(tr.children[idx].innerText)) ? parseFloat(tr.children[idx].innerText) : tr.children[idx].innerText;
+      else if(tr.children[idx].outerText)
+        return !isNaN(parseFloat(tr.children[idx].outerText)) ? parseFloat(tr.children[idx].outerText) : tr.children[idx].outerText;
+      else
+        return !isNaN(parseFloat(tr.children[idx].textContent)) ? parseFloat(tr.children[idx].textContent) : tr.children[idx].textContent;
+    }
+    
+    const comparer = (idx, asc) => (a, b) => ((v1, v2) =>
+      v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ? v1 - v2 : v1.toString().localeCompare(v2)
+    )(getCellValue(asc ? a : b, idx), getCellValue(asc ? b : a, idx));
+    
+    document.querySelectorAll('th').forEach(th => th.addEventListener('click', (() => {
+      const table = th.closest('table');
+      const tbody = table.querySelector('tbody');
+      Array.from(tbody.querySelectorAll('tr'))
+        .sort(comparer(Array.from(th.parentNode.children).indexOf(th), this.asc = !this.asc))
+        .forEach(tr => tbody.appendChild(tr));
+    })));
+
+    const countTD = () => {
+      let count = 0;
+      document.querySelectorAll('#myTable > tbody > tr').forEach(tr => {
+        if (tr.getAttribute('hidden') == null) {
+          count++;
+        }
+      }
+      );
+      return count;
+    }
+
+    const filter = (site) => {
+      const trs = document.querySelectorAll('#myTable > tbody > tr'),
+        tds = document.querySelectorAll('#myTable > tbody > tr > td:nth-child(1)');
+      for (let elem in tds) {
+        const td = tds[elem].outerText;
+        if (`${td}`.toLowerCase() == `${site}`.toLowerCase())
+          trs[elem].toggleAttribute('hidden');
+      }
+    }
+
+    document.getElementById('H3').innerText = countTD() + ' elements found:';
+
+    document.querySelectorAll('body > div > .site-checkbox').forEach(elem => {
+      elem.addEventListener('click', () => {
+        const id = elem.getAttribute('id');
+        filter(id);
+        document.getElementById('H3').innerText = countTD() + ' elements found:';
+      });
+    });
+</script>

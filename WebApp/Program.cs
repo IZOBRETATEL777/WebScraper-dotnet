@@ -4,7 +4,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 // DI
 builder.Services.AddScoped<ISearchItemService, SearchItemServiceImpl>();
-builder.Services.AddScoped<IResutlSorting, ResutlSortingServiceImpl>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -18,11 +17,11 @@ app.UseRouting();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}"
+    pattern: "{controller=Search}/{action=SearchPage}"
 );
 app.MapControllerRoute(
     name: "search",
-    pattern: "{controller=Search}/{action=SearchItem}"
+    pattern: "{controller=Result}/{action=ResultPage}"
 );
 
 app.Run();

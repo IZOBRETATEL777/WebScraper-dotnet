@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model SearchModel
+<form asp-controller="Result" asp-action="ResultPage" method="post">
+    <label asp-for="ToSearch">Enter item name</label>
+    <input type="text" asp-for="ToSearch" placeholder="Search for item">
+    @foreach (StoresEnum store in Enum.GetValues(typeof(StoresEnum)))
+    {
+        <input type="checkbox" asp-for="UsedSites[store.GetShortName()]" checked> @store.GetFullName()
+    }
+    <input type="submit">
+</form>

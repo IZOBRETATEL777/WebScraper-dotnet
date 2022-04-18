@@ -5,6 +5,6 @@ namespace WebApp.Services
 {
     public interface ISearchItemService
     {
-        List<IRepresentableItem> FindItemByTitle(string title);
+        List<IRepresentableItem> FindItemByTitle(string title, Dictionary < string, bool > usedSites);
     }
 }
